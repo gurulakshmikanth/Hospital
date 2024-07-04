@@ -1,0 +1,47 @@
+{% extends 'dummy.html' %}
+{% load static %}
+{% block title %}
+<title>Add Appointment</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="margin-top: 50px">
+    <h2 class="text-center">Add Appointment</h2>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+            <label  >Doctor Name</label>
+            <select name="doctor" id="" class="form-control" >
+                {% for i in do %}
+                    <option value="{{ i.name }}">[{{ i.id }}]  {{ i.name }} </option>
+                {% endfor %}
+            </select><br><br>
+
+            <label  >Patient Name</label>
+            <select name="patient" id="" class="form-control" >
+                {% for i in pa %}
+                    <option value="{{ i.pname }}">[{{ i.id }}]  {{ i.pname }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label for="">Date</label>
+            <input type="date" name="date" id="" class="form-control"  required><br><br>
+            <label >Time</label>
+            <input type="time" name="time" id="ad" class="form-control"  required><br><br>
+
+            <input type="submit" value="Submit" class="form-control btn btn-primary">
+    </form>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Record Saved Successfully')
+    window.location=('{% url "view_appointment" %}')
+
+</script>
+{% elif error == "yes" %}
+<script>
+    alert('Something went wrong, try again')
+</script>
+{% endif %}
+{% endblock %}

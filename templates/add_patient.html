@@ -1,0 +1,42 @@
+{% extends 'dummy.html' %}
+{% load static %}
+{% block title %}
+<title>Add Patient</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="margin-top: 50px">
+    <h2 class="text-center">Add Patient</h2>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+            <label  >Patient Name</label>
+            <input type="text" name="an" id="an" class="form-control" required><br><br>
+
+            <label >Contact</label>
+            <input type="text" name="co" id="co" class="form-control" required><br><br>
+
+            <label >Gender</label>
+            <input type="radio" name="g" id="g" value="Male" required>Male
+            <input type="radio" name="g" value="Female">Female<br><br>
+
+            <label >Address</label>
+            <input type="textarea" name="ad" id="sc" class="form-control"  required><br><br>
+
+            <input type="submit" value="Submit" class="form-control btn btn-primary">
+    </form>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Record Saved Successfully')
+    window.location=('{% url "view_patient" %}')
+
+</script>
+{% elif error == "yes" %}
+<script>
+    alert('Something went wrong, try again')
+</script>
+{% endif %}
+{% endblock %}
