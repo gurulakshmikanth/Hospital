@@ -23,11 +23,11 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 SECRET_KEY = 'django-insecure-!7!m6*a0+@pf@kiu0l8e7^lu(3vqygcvn_&baq+v5gjuf0mja!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "sparkling-comfort-production.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = ["https://sparkling-comfort-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://sparkling-comfort-production.up.railway.app","https://www.sparkling-comfort-production.up.railway.app"]
 
-ALLOWED_HOSTS = ["*"]
+
 
 
 # Application definition
@@ -53,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Hospital.urls'
-CSRF_TRUSTED_ORIGINS=['https://127.0.0.1:8000',]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -126,3 +126,6 @@ STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
