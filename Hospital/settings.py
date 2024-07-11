@@ -24,6 +24,8 @@ SECRET_KEY = 'django-insecure-!7!m6*a0+@pf@kiu0l8e7^lu(3vqygcvn_&baq+v5gjuf0mja!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "sparkling-comfort-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://sparkling-comfort-production.up.railway.app"]
 
 ALLOWED_HOSTS = ["*"]
 
@@ -51,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Hospital.urls'
-
+CSRF_TRUSTED_ORIGINS=['https://127.0.0.1:8000',]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
