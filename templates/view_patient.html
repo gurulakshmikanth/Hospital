@@ -5,6 +5,17 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="container"> 
+    <br>
+    {% if messages %}
+        {% for messages in messages %}
+            <div class=" alert alert-info alert-dismissable fade show " role="alert">
+                {{ messages }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
 <div class="container" style="margin-top:50px">
     <h2 class="text-center">View Patient</h2>
     <br><br>
@@ -17,19 +28,45 @@
                 <th>Patient Gender</th>
                 <th> Contact</th>
                 <th> Address</th>
+                <th>Fees</th>
+                <th>Paid</th>
+                <th>Balance</th>
+                <th>Discharge</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             {% for i in pat %}
+                {% if i.discharge %}
                 <tr>
                     <td>{{ i.id }}</td>
                     <td>{{ i.pname }}</td>
                     <td>{{ i.gender }}</td>
                     <td>{{ i.pmobile}}</td>
                     <td>{{ i.address }}</td>
+                    <td>{{ i.fees }}</td>
+                    <td>{{ i.paid}}  
+                    <td>{{ i.balance }} </td>
+                    <td><a href="{% url 'not_discharge' i.id %}"><button type="button" onclick="return confirm('Are u sure to not discharge')" class="btn btn-secondary">discharged</button></a></td>
+                    
                     <td><a href="{% url 'delete_patient' i.id %}" onclick="return confirm('Are u really want to delete')" class="btn btn-danger">Delete</a></td>
                 </tr>
+                {% else %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td><a href="{% url 'patientdetails' i.pk %}">{{ i.pname }}</a></td>
+                    
+                    <td>{{ i.gender }}</td>
+                    <td>{{ i.pmobile}}</td>
+                    <td>{{ i.address }}</td>
+                    <td>{{ i.fees }}</td>
+                    <td>{{ i.paid}}</td>
+                    <td>{{ i.balance }}</td>
+                    <td><a href="{% url 'discharge' i.id %}"><button type="button"  class="btn btn-primary">ready to discharge</button></a></td>
+                    
+                    <td><a href="{% url 'delete_patient' i.id %}" onclick="return confirm('Are u really want to delete')" class="btn btn-danger">Delete</a></td>
+                </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

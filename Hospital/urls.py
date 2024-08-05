@@ -33,5 +33,9 @@ urlpatterns = [
     path('delete_patient(?p<int:pid>)',delete_patient,name='delete_patient'),
     path('add_appointment/',add_appointment,name='add_appointment'),
     path('delete_appointment(?p<int:pid>)',delete_appointment,name='delete_appointment'),
-     path('view_appointment/',view_appointment,name='view_appointment')
+    path('view_appointment/',view_appointment,name='view_appointment'),
+    path('discharge/(?p<int:id>)',discharge,name='discharge'),
+    path('not_discharge/(?p<int:id>)',not_discharge,name='not_discharge'),
+    path('patientdetail/(?p<int:id>)',patientdetails,name='patientdetails'),
+
 ]

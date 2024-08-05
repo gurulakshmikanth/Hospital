@@ -11,18 +11,7 @@
 
     <form action="" method="POST">
         {% csrf_token %}
-            <label  >Patient Name</label>
-            <input type="text" name="an" id="an" class="form-control" required><br><br>
-
-            <label >Contact</label>
-            <input type="text" name="co" id="co" class="form-control" required><br><br>
-
-            <label >Gender</label>
-            <input type="radio" name="g" id="g" value="Male" required>Male
-            <input type="radio" name="g" value="Female">Female<br><br>
-
-            <label >Address</label>
-            <input type="textarea" name="ad" id="sc" class="form-control"  required><br><br>
+            {{ pfo.as_p }}
 
             <input type="submit" value="Submit" class="form-control btn btn-primary">
     </form>

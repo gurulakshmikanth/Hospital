@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login
 from Management.models import *
-
+from django.contrib import messages
+from .forms import *
 # Create your views here.
 
 
@@ -104,18 +105,19 @@ def view_patient(request):
 
 def add_patient(request):
     error=''
+    pfo=PatientrForm()
     if request.method=='POST':
-        n=request.POST['an']
-        c=request.POST['co']
-        g=request.POST['g']
-        s=request.POST['ad']
+        
+        
 
         try:
-            doc=Patient.objects.create(pname=n,gender=g,pmobile=c,address=s)
-            error='no'
+            mpfo=PatientrForm(request.POST)
+            if mpfo.is_valid():
+                mpfo.save()
+                error='no'
         except:
             error='yes'
-    d={'error':error}
+    d={'error':error,'pfo':pfo}
     return render(request,'add_patient.html',d)
 
 def delete_patient(request,pid):
@@ -162,3 +164,34 @@ def delete_appointment(request,pid):
     appo=Appointment.objects.get(id=pid)
     appo.delete()
     return redirect('view_appointment')
+
+
+def discharge(request,id):
+    pat=Patient.objects.get(pk=id)
+    if pat.balance==0:
+        pat.discharge=True
+        pat.save()
+    else:
+        messages.error(request,("Fees Pending"))
+    return redirect('view_patient')
+
+def not_discharge(request,id):
+    pat=Patient.objects.get(pk=id)
+    pat.discharge=False
+    pat.save()
+    return redirect('view_patient')
+
+def patientdetails(request,id):
+    pat=Patient.objects.get(pk=id)
+    
+    if request.method=='POST':
+
+        pay=int(request.POST['pay'])
+        pat.pay=pay
+        pat.paid+=pay
+        pat.balance=pat.fees - pat.paid
+        pat.save()
+        return redirect('view_patient')
+    d={'pat':pat}
+    
+    return render(request,'patient_detail.html',d)

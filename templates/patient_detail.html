@@ -1,0 +1,53 @@
+{% extends 'dummy.html' %}
+
+{% block title %}
+<title>Contact</title>
+{% endblock %}
+
+{% block body %}
+
+
+    <h1>Patient Details</h1>
+    <h2>{{ pat.pname }}</h2>
+
+    
+        <p>
+            <label for="id_name">Name: </label>
+            {{ pat.pname }}
+        </p>
+        <p>
+            <label for="id_gender">Gender: </label>
+            {{ pat.gender }}
+        </p>
+        <p>
+            <label for="id_mobile">Mobile: </label>
+            {{ pat.pmobile }}
+        </p>
+        <p>
+            <label for="id_address">Address: </label>
+            {{ pat.address }}
+        </p>
+        <p>
+            <label for="id_fees">Fees: </label>
+            {{ pat.fees }}
+        </p>
+        <p>
+            <label for="id_paid">Paid: </label>
+            {{ pat.paid }}
+        </p>
+        <p>
+            <label for="id_balance">Balance: </label>
+            {{ pat.balance }}
+        </p>
+        <form method="post">
+            {% csrf_token %}
+        <p>
+            <label for="pay">Pay: </label>
+            <input type="number" name="pay" id="pay">
+        </p>
+        <button type="submit" class="btn btn-primary">PAY</button>
+        </form>
+
+    <a href="{% url 'view_patient' %}">Back to Patient List</a>
+
+    {% endblock %}

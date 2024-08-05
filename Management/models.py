@@ -16,6 +16,11 @@ class Patient(models.Model):
     gender=models.CharField(max_length=10)
     pmobile=models.IntegerField()
     address=models.CharField(max_length=150)
+    fees=models.IntegerField(default=0)
+    paid=models.IntegerField(default=0)
+    balance=models.IntegerField(default=0)
+    pay=models.IntegerField(default=0)
+    discharge=models.BooleanField(default=False)
 
     def __str__(self):
         return self.pname
