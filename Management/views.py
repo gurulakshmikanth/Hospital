@@ -195,3 +195,4 @@ def patientdetails(request,id):
     d={'pat':pat}
     
     return render(request,'patient_detail.html',d)
+
