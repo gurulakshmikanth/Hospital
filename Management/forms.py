@@ -13,11 +13,7 @@ class PatientrForm(forms.ModelForm):
         model=Patient
         fields='__all__'
 
-    def clean_pname(self):
-        pname=self.cleaned_data.get('pname')
-        if any(char.isdigit() for char in pname):
-            raise forms.ValidationError("Name contains string")
-        return pname
+    
 
 class AppointmentForm(forms.ModelForm):
     class Meta:

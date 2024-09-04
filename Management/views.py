@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate,logout,login
 from Management.models import *
 from django.contrib import messages
 from .forms import *
-import re
 # Create your views here.
 
 
@@ -109,39 +108,22 @@ def view_patient(request):
 
 def add_patient(request):
     error=''
-    if request.method == 'POST':
-        pname = request.POST.get('pname')
-        gender = request.POST.get('gender')
-        pmobile = request.POST.get('pmobile')
-        address = request.POST.get('address')
-        fees = request.POST.get('fees')
-        paid = request.POST.get('paid')
-        balance = request.POST.get('balance')
-        pay = request.POST.get('pay')
-        discharge = request.POST.get('discharge') == 'on'
-
+    pfo=PatientrForm()
+    if request.method=='POST':
+        pname=request.POST.get('pname')
+        
         if any(char.isdigit() for char in pname ):
-            error=messages.error(request,('Name contains string'))
+            error=messages.error(request,('Name contains string')) 
         else:
             try:
-                Patient.objects.create(
-                    pname=pname,
-                    gender=gender,
-                    pmobile=pmobile,
-                    address=address,
-                    fees=fees,
-                    paid=paid,
-                    balance=balance,
-                    pay=pay,
-                    discharge=discharge
-                )
-                error='no'
+                mpfo=PatientrForm(request.POST)
+                if mpfo.is_valid():
+                    mpfo.save()
+                    error='no'
             except Exception as e:
                 error='yes'
-
-    d={'error':error}
-
-    return render(request, 'add_patient.html',d)
+    d={'error':error,'pfo':pfo,}
+    return render(request,'add_patient.html',d)
 
 def delete_patient(request,pid):
     if not request.user.is_staff:
