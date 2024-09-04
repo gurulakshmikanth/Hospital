@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,logout,login
 from Management.models import *
 from django.contrib import messages
 from .forms import *
+import re
 # Create your views here.
 
 
@@ -80,11 +81,14 @@ def add_doctor(request):
         g=request.POST['g']
         s=request.POST['sc']
 
-        try:
-            doc=Doctor.objects.create(name=n,mobile=c,gender=g,specialization=s)
-            error='no'
-        except:
-            error='yes'
+        if any(char.isdigit() for char in n ):
+            error=messages.error(request,('Name contains string'))
+        else:
+            try:
+                doc=Doctor.objects.create(name=n,mobile=c,gender=g,specialization=s)
+                error='no'
+            except Exception as e:
+                error='yes'
     d={'error':error}
     return render(request,'add_doctor.html',d)
 
@@ -105,20 +109,39 @@ def view_patient(request):
 
 def add_patient(request):
     error=''
-    pfo=PatientrForm()
-    if request.method=='POST':
-        
-        
+    if request.method == 'POST':
+        pname = request.POST.get('pname')
+        gender = request.POST.get('gender')
+        pmobile = request.POST.get('pmobile')
+        address = request.POST.get('address')
+        fees = request.POST.get('fees')
+        paid = request.POST.get('paid')
+        balance = request.POST.get('balance')
+        pay = request.POST.get('pay')
+        discharge = request.POST.get('discharge') == 'on'
 
-        try:
-            mpfo=PatientrForm(request.POST)
-            if mpfo.is_valid():
-                mpfo.save()
+        if any(char.isdigit() for char in pname ):
+            error=messages.error(request,('Name contains string'))
+        else:
+            try:
+                Patient.objects.create(
+                    pname=pname,
+                    gender=gender,
+                    pmobile=pmobile,
+                    address=address,
+                    fees=fees,
+                    paid=paid,
+                    balance=balance,
+                    pay=pay,
+                    discharge=discharge
+                )
                 error='no'
-        except:
-            error='yes'
-    d={'error':error,'pfo':pfo}
-    return render(request,'add_patient.html',d)
+            except Exception as e:
+                error='yes'
+
+    d={'error':error}
+
+    return render(request, 'add_patient.html',d)
 
 def delete_patient(request,pid):
     if not request.user.is_staff:

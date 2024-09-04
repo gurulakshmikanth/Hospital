@@ -6,6 +6,17 @@
 
 {% block body %}
 
+<div class="container"> 
+    <br>
+    {% if messages %}
+        {% for messages in messages %}
+            <div class=" alert alert-info alert-dismissable fade show " role="alert">
+                {{ messages }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
 <div class="container" style="margin-top: 50px">
     <h2 class="text-center">Create Doctor</h2>
 
@@ -38,5 +49,6 @@
 <script>
     alert('Something went wrong, try again')
 </script>
+
 {% endif %}
 {% endblock %}

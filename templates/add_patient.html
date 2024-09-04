@@ -5,13 +5,53 @@
 {% endblock %}
 
 {% block body %}
+<div class="container"> 
+    <br>
+    {% if messages %}
+        {% for messages in messages %}
+            <div class=" alert alert-info alert-dismissable fade show " role="alert">
+                {{ messages }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
 
 <div class="container" style="margin-top: 50px">
     <h2 class="text-center">Add Patient</h2>
 
     <form action="" method="POST">
         {% csrf_token %}
-            {{ pfo.as_p }}
+        
+        
+        <label for="pname">Name:</label>
+        <input type="text" id="pname" name="pname" value="{{ request.POST.pname }}" class="form-control"><br><br>
+        
+        
+        <label >Gender</label>
+            <input type="radio" name="gender" id="g" value="Male" required>Male
+            <input type="radio" name="gender" value="Female">Female<br><br>
+        
+        <label for="pmobile">Mobile:</label>
+        <input type="number" id="pmobile" name="pmobile" value="{{ request.POST.pmobile }}" class="form-control"><br><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{ request.POST.address }}" class="form-control"><br><br>
+        
+        <label for="fees">Fees:</label>
+        <input type="number" id="fees" name="fees" value="{{ request.POST.fees }}" class="form-control"><br><br>
+        
+        <label for="paid">Paid:</label>
+        <input type="number" id="paid" name="paid" value="{{ request.POST.paid }}" class="form-control"><br><br>
+        
+        <label for="balance">Balance:</label>
+        <input type="number" id="balance" name="balance" value="{{ request.POST.balance }}" class="form-control"><br><br>
+        
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" value="{{ request.POST.pay }}" class="form-control"><br><br>
+        
+        <label for="discharge">Discharge:</label>
+        <input type="checkbox" id="discharge" name="discharge" {% if request.POST.discharge %}checked{% endif %}><br><br>
+
 
             <input type="submit" value="Submit" class="form-control btn btn-primary">
     </form>

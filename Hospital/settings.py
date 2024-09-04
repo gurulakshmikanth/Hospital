@@ -24,8 +24,8 @@ SECRET_KEY = 'django-insecure-!7!m6*a0+@pf@kiu0l8e7^lu(3vqygcvn_&baq+v5gjuf0mja!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "sparkling-comfort-production.up.railway.app","web-production-628a.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = ["https://sparkling-comfort-production.up.railway.app","https://www.sparkling-comfort-production.up.railway.app","https://web-production-628a.up.railway.app","https://web-production-628a.up.railway.app"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "sparkling-comfort-production.up.railway.app",]
+CSRF_TRUSTED_ORIGINS = ["https://sparkling-comfort-production.up.railway.app","https://www.sparkling-comfort-production.up.railway.app"]
 
 
 
