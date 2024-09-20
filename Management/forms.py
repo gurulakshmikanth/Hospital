@@ -9,9 +9,13 @@ class DoctorForm(forms.ModelForm):
     
 
 class PatientrForm(forms.ModelForm):
+    lis=[('Male','male'),('Female','female')]
+    gender=forms.ChoiceField(widget=forms.RadioSelect,choices=lis)
     class Meta:
         model=Patient
-        fields='__all__'
+        lis=[('Male','male'),('Female','female')]
+        gender=forms.ChoiceField(widget=forms.RadioSelect(choices=lis))
+        fields=['pname','gender','pmobile','address','fees','paid','balance','pay','discharge']
 
     
 

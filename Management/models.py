@@ -12,8 +12,9 @@ class Doctor(models.Model):
         return self.name
 
 class Patient(models.Model):
+    lis=[('Male','male'),('Female','female')]
     pname=models.CharField(max_length=100)
-    gender=models.CharField(max_length=10)
+    gender=models.CharField(max_length=6,choices=lis)
     pmobile=models.IntegerField()
     address=models.CharField(max_length=150)
     fees=models.IntegerField(default=0)

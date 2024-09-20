@@ -21,8 +21,55 @@
 
     <form action="" method="POST">
         {% csrf_token %}
-            {{ pfo.as_p }}
-
+        <label for="pname">Pname:</label>
+        {{ pfo.pname }}
+        <br><br>
+    
+        <!-- Render Gender with inline radio buttons -->
+        <label for="gender">Gender:</label>
+        <div>
+            {% for radio in pfo.gender %}
+                <div style="display: inline-block; margin-right: 10px;">
+                    {{ radio.tag }} {{ radio.choice_label }}
+                </div>
+            {% endfor %}
+        </div>
+        <br><br>
+    
+        <!-- Render Pmobile -->
+        <label for="pmobile">Pmobile:</label>
+        {{ pfo.pmobile }}
+        <br><br>
+    
+        <!-- Render Address -->
+        <label for="address">Address:</label>
+        {{ pfo.address }}
+        <br><br>
+    
+        <!-- Render Fees -->
+        <label for="fees">Fees:</label>
+        {{ pfo.fees }}
+        <br><br>
+    
+        <!-- Render Paid -->
+        <label for="paid">Paid:</label>
+        {{ pfo.paid }}
+        <br><br>
+    
+        <!-- Render Balance -->
+        <label for="balance">Balance:</label>
+        {{ pfo.balance }}
+        <br><br>
+    
+        <!-- Render Pay -->
+        <label for="pay">Pay:</label>
+        {{ pfo.pay }}
+        <br><br>
+    
+        <!-- Render Discharge -->
+        <label for="discharge">Discharge:</label>
+        {{ pfo.discharge }}
+        <br><br>
             <input type="submit" value="Submit" class="form-control btn btn-primary">
     </form>
 </div>
