@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'hospitaldb',
         'USER': 'admin',
         'PASSWORD': 'admin123',
-        'HOST': 'postgresql',
+        'HOST': 'postgres-new',
         'PORT': '5432',
     }
 }
